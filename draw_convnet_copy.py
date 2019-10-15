@@ -6,7 +6,7 @@ from matplotlib.lines import Line2D
 from matplotlib.patches import Rectangle
 from matplotlib.patches import Circle
 
-NumDots = 4
+NumDots = 3
 NumConvMax = 8
 NumFcMax = 20
 White = 1.
@@ -153,15 +153,15 @@ if __name__ == '__main__':
                       num=num_show_list[ind],
                       top_left=top_left_list[ind], loc_diff=loc_diff_list[ind])
         label(top_left_list[ind], text_list[ind] + '\n{}@{}x{}'.format(
-            num_list[ind], size_list[ind][0], size_list[ind][1]))
+            num_list[ind], size_list[ind][1], size_list[ind][0]))
 
     ############################
     # in between layers
-    start_ratio_list = [[0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8], [0.4, 0.5]]
-    end_ratio_list = [[0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8], [0.4, 0.5]]
-    patch_size_list = [(3, 1), (2, 1), (3, 1), (2, 1), (3, 1)]
+    start_ratio_list = [[0.4, 0.5], [0.4, 0.8],[0.4, 0.5], [0.4, 0.8],[0.4, 0.5], [0.4, 0.8],[0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8]]
+    end_ratio_list = [[0.4, 0.5], [0.4, 0.8],[0.4, 0.5], [0.4, 0.8],[0.4, 0.5], [0.4, 0.8],[0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8]]
+    patch_size_list = [(3, 1), (2, 1),(3, 1), (2, 1),(3, 1), (2, 1), (3, 1), (2, 1), (3, 1), (2, 1), (3, 1), (2, 1)]
     ind_bgn_list = range(len(patch_size_list))
-    text_list = ['conv', 'pool', 'conv', 'pool', 'conv']
+    text_list = ['conv', 'pool','conv', 'pool','conv', 'pool','conv', 'pool', 'conv', 'pool', 'conv','pool']
 
     for ind in range(len(patch_size_list)):
         add_mapping(
@@ -179,7 +179,7 @@ if __name__ == '__main__':
         elif ind == 2:
             x_off = 30
         label(top_left_list[ind], text_list[ind] + '\n{}x{}'.format(
-            patch_size_list[ind][0], patch_size_list[ind][1]), xy_off=[x_off, y_off]
+            patch_size_list[ind][1], patch_size_list[ind][0]), xy_off=[x_off, y_off]
         )
 
 
@@ -194,6 +194,11 @@ if __name__ == '__main__':
     text_list = ['Hidden\nunits'] * (len(size_list) - 1) + ['Outputs']
 
     for ind in range(len(size_list)):
+        if ind == 0:
+            NumFcMax = 30
+        elif ind == 1:
+            NumFcMax = 20
+
         if flag_omit:
             add_layer_with_omission(patches, colors, size=size_list[ind],
                                     num=num_list[ind],
